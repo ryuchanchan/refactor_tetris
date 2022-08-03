@@ -4,7 +4,7 @@
 #include <sys/time.h>
 #include <ncurses.h>
 
-#define R 20
+#define R 30
 #define C 15
 #define T 1
 #define F 0
