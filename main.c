@@ -1,20 +1,3 @@
-/*
-----やったこと----
-- RとCの名前変えた
-- TとFをtrue falseにした
-- 2つのヘッダーファイル消去
-	#include <stdio.h>
-	#include <time.h>
-- timeoutの関数を消去
-- 全体的なfor文の見栄え
-- tetris.hの作成
-- 変数変えた
-    final -> score
-    GameON -> game_start
--main（）の中でiとjが何回も宣言されていたので一回に統一(n mとかもiとjではダメ？)
----
-*/
-
 #include "tetris.h"
 
 char Table[length_size][width_size] = {0};
@@ -101,27 +84,16 @@ int check_elapsed_time(){
 	return ((suseconds_t)(now.tv_sec*1000000 + now.tv_usec) -((suseconds_t)before_now.tv_sec*1000000 + before_now.tv_usec)) > timer;
 }
 
-int main() {
+void operate(char c)
+{
+    char Table[length_size][width_size] = {0};
+    int score = 0;
+    char game_start = true;
+    suseconds_t timer = 400000;
+    int decrease = 1000;
 	int i, j;
-    srand(time(0));
-    score = 0;
-    int c;
-    initscr();
-	gettimeofday(&before_now, NULL);
-	timeout(1);
-	Struct new_shape = Duplicate_block(StructsArray[rand()%7]);
-    new_shape.col = rand() % (width_size - new_shape.width + 1);
-    new_shape.row = 0;
-    Free_block(current);
-	current = new_shape;
-	if(!Check_block_position(current)){
-		game_start = false;
-	}
-    Print_window();
-	while(game_start){
-		if ((c = getch()) != ERR) {
-			Struct temp = Duplicate_block(current);
-			switch(c){
+	Struct temp = Duplicate_block(current);
+	switch(c){
 				case 's':
 					temp.row++;  //move down
 					if(Check_block_position(temp))
@@ -179,67 +151,32 @@ int main() {
 			}
 			Free_block(temp);
 			Print_window();
-		}
+}
+
+
+int main() {
+	int i, j;
+    srand(time(0));
+    score = 0;
+    int c;
+    initscr();
+	gettimeofday(&before_now, NULL);
+	timeout(1);
+	Struct new_shape = Duplicate_block(StructsArray[rand()%7]);
+    new_shape.col = rand() % (width_size - new_shape.width + 1);
+    new_shape.row = 0;
+    Free_block(current);
+	current = new_shape;
+	if(!Check_block_position(current)){
+		game_start = false;
+	}
+    Print_window();
+	while(game_start){
+		if ((c = getch()) != ERR)
+			operate(c);
 		gettimeofday(&now, NULL);
 		if (check_elapsed_time()) {
-			Struct temp = Duplicate_block(current);
-			switch('s'){
-				case 's':
-					temp.row++;
-					if(Check_block_position(temp))
-						current.row++;
-					else {
-						for(i = 0; i < current.width ; i++){
-							for(j = 0; j < current.width ; j++){
-								if(current.array[i][j])
-									Table[current.row + i][current.col+j] = current.array[i][j];
-							}
-						}
-						int n, m, sum, count=0;
-						for(n = 0; n < length_size; n++){
-							sum = 0;
-							for(m = 0; m < width_size; m++) {
-								sum+=Table[n][m];
-							}
-							if(sum==width_size){
-								count++;
-								int l, k;
-								for(k = n;k >=1;k--)
-									for(l=0;l<width_size;l++)
-										Table[k][l]=Table[k-1][l];
-								for(l=0;l<width_size;l++)
-									Table[k][l]=0;
-								timer-=decrease--;
-							}
-						}
-						Struct new_shape = Duplicate_block(StructsArray[rand()%7]);
-						new_shape.col = rand()%(width_size-new_shape.width+1);
-						new_shape.row = 0;
-						Free_block(current);
-						current = new_shape;
-						if(!Check_block_position(current)){
-							game_start = false;
-						}
-					}
-					break;
-				case 'd':
-					temp.col++;
-					if(Check_block_position(temp))
-						current.col++;
-					break;
-				case 'a':
-					temp.col--;
-					if(Check_block_position(temp))
-						current.col--;
-					break;
-				case 'w':
-					Rotate_block(temp);
-					if(Check_block_position(temp))
-						Rotate_block(current);
-					break;
-			}
-			Free_block(temp);
-			Print_window();
+			operate('s');
 			gettimeofday(&before_now, NULL);
 		}
 	}
