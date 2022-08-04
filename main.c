@@ -12,7 +12,7 @@
     final -> score
     GameON -> game_start
 -main（）の中でiとjが何回も宣言されていたので一回に統一(n mとかもiとjではダメ？)
-
+---
 */
 
 #include "tetris.h"
