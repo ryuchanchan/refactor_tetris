@@ -42,6 +42,9 @@ int check_elapsed_time(t_game *game);
 // init.c
 void init_game(t_game *game);
 
+// block.c
+t_block create_block();
+
 // char Table[length_size][width_size] = {0};
 // int score = 0;
 // char game_start = true;

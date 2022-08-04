@@ -1,28 +1,28 @@
 #include "tetris.h"
 
-static const t_block StructsArray[7]= {
-	{(char *[]){(char []){0,1,1},
-				(char []){1,1,0},
-				(char []){0,0,0}}, 3},
-	{(char *[]){(char []){1,1,0},
-				(char []){0,1,1},
-				(char []){0,0,0}}, 3},
-	{(char *[]){(char []){0,1,0},
-				(char []){1,1,1},
-				(char []){0,0,0}}, 3},
-	{(char *[]){(char []){0,0,1},
-				(char []){1,1,1},
-				(char []){0,0,0}}, 3},
-	{(char *[]){(char []){1,0,0},
-				(char []){1,1,1}, 
-				(char []){0,0,0}}, 3},
-	{(char *[]){(char []){1,1},
-				(char []){1,1}}, 2},
-	{(char *[]){(char []){0,0,0,0},
-				(char []){1,1,1,1},
-				(char []){0,0,0,0}, 
-				(char []){0,0,0,0}}, 4}
-};
+// static const t_block StructsArray[7]= {
+// 	{(char *[]){(char []){0,1,1},
+// 				(char []){1,1,0},
+// 				(char []){0,0,0}}, 3},
+// 	{(char *[]){(char []){1,1,0},
+// 				(char []){0,1,1},
+// 				(char []){0,0,0}}, 3},
+// 	{(char *[]){(char []){0,1,0},
+// 				(char []){1,1,1},
+// 				(char []){0,0,0}}, 3},
+// 	{(char *[]){(char []){0,0,1},
+// 				(char []){1,1,1},
+// 				(char []){0,0,0}}, 3},
+// 	{(char *[]){(char []){1,0,0},
+// 				(char []){1,1,1}, 
+// 				(char []){0,0,0}}, 3},
+// 	{(char *[]){(char []){1,1},
+// 				(char []){1,1}}, 2},
+// 	{(char *[]){(char []){0,0,0,0},
+// 				(char []){1,1,1,1},
+// 				(char []){0,0,0,0}, 
+// 				(char []){0,0,0,0}}, 4}
+// };
 
 void operate(char c, t_game *game)
 {
@@ -59,9 +59,7 @@ void operate(char c, t_game *game)
                     }
                 }
                 game->score += 100*count;
-                t_block new_shape = Duplicate_block(StructsArray[rand() % 7]);
-                new_shape.col = rand() % (width_size - new_shape.width + 1);
-                new_shape.row = 0;
+                t_block new_shape = create_block();
                 Free_block(current);
                 current = new_shape;
                 if(!Check_block_position(current, game)){
