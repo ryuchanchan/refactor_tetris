@@ -59,9 +59,7 @@ void operate(char c, t_game *game)
                     }
                 }
                 game->score += 100*count;
-                t_block new_shape = Duplicate_block(StructsArray[rand() % 7]);
-                new_shape.col = rand() % (width_size - new_shape.width + 1);
-                new_shape.row = 0;
+                t_block new_shape = create_block();
                 Free_block(current);
                 current = new_shape;
                 if(!Check_block_position(current, game)){
