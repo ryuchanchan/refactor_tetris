@@ -1,14 +1,18 @@
 /*
 ----やったこと----
-RとCの名前変えた
-TとFをtrue falseにした
-2つのヘッダーファイル コメントアウト
-timeoutの関数を消去
-全体的なfor文の見栄え
-tetris.hの作成
-変数変えた
-final -> score
-GameON -> game_start
+- RとCの名前変えた
+- TとFをtrue falseにした
+- 2つのヘッダーファイル消去
+	#include <stdio.h>
+	#include <time.h>
+- timeoutの関数を消去
+- 全体的なfor文の見栄え
+- tetris.hの作成
+- 変数変えた
+    final -> score
+    GameON -> game_start
+-main（）の中でiとjが何回も宣言されていたので一回に統一(n mとかもiとjではダメ？)
+
 */
 
 #include "tetris.h"
@@ -241,7 +245,6 @@ int main() {
 	}
 	FunctionDS(current);
 	endwin();
-	// int i, j;
 	for(i = 0; i < length_size; i++){
 		for(j = 0; j < width_size; j++){
 			printf("%c ", Table[i][j] ? '#': '.');
