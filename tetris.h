@@ -14,46 +14,34 @@ typedef struct {
     char **array;
     int width, row, col;
 } Struct;
-Struct current;
 
 typedef struct {
     char **shape;
     int width, row, col;
 } t_block;
-
+t_block current;
 
 typedef struct {
-	char **map;
+	char map[length_size][width_size];
 	unsigned int score;
 	bool status;
-	suseconds_t speed = 400000;
-	int decrease = 1000;
+	suseconds_t speed;
+	int decrease;
 	struct timeval before_now;
 	struct timeval now;
-} t_game
+} t_game;
 
-const Struct StructsArray[7]= {
-	{(char *[]){(char []){0,1,1},
-				(char []){1,1,0},
-				(char []){0,0,0}}, 3},
-	{(char *[]){(char []){1,1,0},
-				(char []){0,1,1},
-				(char []){0,0,0}}, 3},
-	{(char *[]){(char []){0,1,0},
-				(char []){1,1,1},
-				(char []){0,0,0}}, 3},
-	{(char *[]){(char []){0,0,1},
-				(char []){1,1,1},
-				(char []){0,0,0}}, 3},
-	{(char *[]){(char []){1,0,0},
-				(char []){1,1,1}, 
-				(char []){0,0,0}}, 3},
-	{(char *[]){(char []){1,1},
-				(char []){1,1}}, 2},
-	{(char *[]){(char []){0,0,0,0},
-				(char []){1,1,1,1},
-				(char []){0,0,0,0}, 
-				(char []){0,0,0,0}}, 4}
-};
+
+
+// utils.c
+t_block Duplicate_block(t_block shape);
+void Free_block(t_block shape);
+int Check_block_position(t_block shape, t_game *game);
+void Rotate_block(t_block shape);
+void Print_window(t_game *game);
+int check_elapsed_time(t_game *game);
+
+// init.c
+void init_game(t_game *game);
 
 #endif
