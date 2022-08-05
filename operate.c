@@ -4,61 +4,61 @@ void operate(char c, t_game *game)
 {
     int i, j;
 
-    t_block temp = Duplicate_block(current);
+    t_block temp = duplicate_block(current);
     switch(c){
         case 's':
-            temp.row++;  //move down
-            if(Check_block_position(temp, game))
-                current.row++;
+            temp.position_y++;  //move down
+            if(check_new_position(temp, game))
+                current.position_y++;
             else {
                 for(i = 0; i < current.width ;i++){
                     for(j = 0; j < current.width ; j++){
                         if(current.shape[i][j])
-                            game->map[current.row+i][current.col+j] = current.shape[i][j];
+                            game->map[current.position_y+i][current.position_x+j] = current.shape[i][j];
                     }
                 }
                 int n, m, sum, count=0;
-                for(n = 0; n < length_size; n++){
+                for(n = 0; n < MAP_HEIGHT; n++){
                     sum = 0;
-                    for(m = 0; m < width_size; m++) {
+                    for(m = 0; m < MAP_WIDTH; m++) {
                         sum+=game->map[n][m];
                     }
-                    if(sum==width_size){
+                    if(sum==MAP_WIDTH){
                         count++;
                         int l, k;
                         for(k = n; k >= 1; k--)
-                            for(l=0; l < width_size; l++)
+                            for(l=0; l < MAP_WIDTH; l++)
                                 game->map[k][l] = game->map[k-1][l];
-                        for(l=0; l < width_size; l++)
+                        for(l=0; l < MAP_WIDTH; l++)
                             game->map[k][l]=0;
-                        game->speed -= game->decrease--;
+                        game->speed -= game->time_decrease--;
                     }
                 }
                 game->score += 100*count;
                 t_block new_shape = create_block();
-                Free_block(current);
+                free_block(current);
                 current = new_shape;
-                if(!Check_block_position(current, game)){
+                if(!check_new_position(current, game)){
                     game->status = false;
                 }
             }
             break;
         case 'd':
-            temp.col++;
-            if(Check_block_position(temp, game))
-                current.col++;
+            temp.position_x++;
+            if(check_new_position(temp, game))
+                current.position_x++;
             break;
         case 'a':
-            temp.col--;
-            if(Check_block_position(temp, game))
-                current.col--;
+            temp.position_x--;
+            if(check_new_position(temp, game))
+                current.position_x--;
             break;
         case 'w':
-            Rotate_block(temp);
-            if(Check_block_position(temp, game))
-                Rotate_block(current);
+            rotate_block(temp);
+            if(check_new_position(temp, game))
+                rotate_block(current);
             break;
         }
-        Free_block(temp);
-        Print_window(game);
+        free_block(temp);
+        print_window(game);
 }
