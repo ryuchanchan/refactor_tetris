@@ -30,6 +30,7 @@ static const t_block StructsArray[7]= {
 				(char []){0,0,0,0}}, 4}
 };
 
+
 int main() {
 	t_game game;
 
@@ -48,13 +49,7 @@ int main() {
 	}
 	Free_block(current);
 	endwin();
-	for(i = 0; i < length_size; i++){
-		for(j = 0; j < width_size; j++){
-			printf("%c ", game.map[i][j] ? '#': '.');
-		}
-		printf("\n");
-	}
-	printf("\nGame over!\n");
-	printf("\nScore: %d\n", game.score);
+	output_tetris(game);
+	
     return 0;
 }

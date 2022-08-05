@@ -30,7 +30,6 @@ typedef struct {
 } t_game;
 
 
-
 // utils.c
 t_block Duplicate_block(t_block shape);
 void Free_block(t_block shape);
@@ -45,12 +44,9 @@ void init_game(t_game *game);
 // block.c
 t_block create_block();
 
-// char Table[length_size][width_size] = {0};
-// int score = 0;
-// char game_start = true;
-// suseconds_t timer = 400000;
-// int decrease = 1000;
-
+// operate.c
 void operate(char c, t_game *game);
 
+// output.c
+void	output_tetris(t_game	game);
 #endif
