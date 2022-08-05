@@ -6,7 +6,7 @@
 /*   By: hitoda <hitoda@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/05 01:48:57 by hitoda            #+#    #+#             */
-/*   Updated: 2022/08/06 04:23:36 by hitoda           ###   ########.fr       */
+/*   Updated: 2022/08/06 04:27:59 by hitoda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ static void print_current_game(t_game *game)
 void print_window(t_game *game)
 {
 	int i;
-	
+
 	clear();
 	for(i = 0; i < MAP_WIDTH - 9; i++)
 		printw(" ");
