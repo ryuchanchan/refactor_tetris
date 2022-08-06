@@ -6,13 +6,13 @@
 /*   By: hitoda <hitoda@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/06 23:47:56 by rykawamu          #+#    #+#             */
-/*   Updated: 2022/08/07 04:11:30 by hitoda           ###   ########.fr       */
+/*   Updated: 2022/08/07 04:20:17 by hitoda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "tetris.h"
 
-static void    insert_block_to_map(t_game *game)
+static void	insert_block_to_map(t_game *game)
 {
     int i, j;
 
@@ -53,7 +53,7 @@ static void check_row_filled(t_game *game)
     }
 }
 
-void next_block(t_game *game)
+static void	next_block(t_game *game)
 {
 	insert_block_to_map(game);
 	check_row_filled(game);

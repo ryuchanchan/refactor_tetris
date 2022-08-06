@@ -6,7 +6,7 @@
 /*   By: hitoda <hitoda@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/05 01:41:06 by hitoda            #+#    #+#             */
-/*   Updated: 2022/08/07 03:34:05 by hitoda           ###   ########.fr       */
+/*   Updated: 2022/08/07 04:17:53 by hitoda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,14 @@
 
 static void init_game_info(t_game *game)
 {
+	int i, j;
+
 	game->score = 0;
 	game->speed = 400000;
 	game->time_decrease = 1000;
-	for(int i=0; i < MAP_HEIGHT; i++)
+	for(i = 0; i < MAP_HEIGHT; i++)
 	{
-		for(int j=0; j < MAP_WIDTH; j++)
+		for(j = 0; j < MAP_WIDTH; j++)
 			game->map[i][j] = 0;
 	}
 	gettimeofday(&game->previous_time, NULL);
