@@ -6,7 +6,7 @@
 /*   By: hitoda <hitoda@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/06 23:49:05 by rykawamu          #+#    #+#             */
-/*   Updated: 2022/08/07 02:06:27 by hitoda           ###   ########.fr       */
+/*   Updated: 2022/08/07 03:15:42 by hitoda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ typedef struct {
 	int position_y;
 	int position_x;
 } t_block;
-t_block current;
 
 typedef struct {
 	char map[MAP_HEIGHT][MAP_WIDTH];
@@ -37,6 +36,7 @@ typedef struct {
 	unsigned int time_decrease;
 	struct timeval previous_time;
 	struct timeval now;
+	t_block current;
 } t_game;
 
 
@@ -47,10 +47,10 @@ int check_time_diff(t_game *game);
 void init_game(t_game *game);
 
 // block.c
-t_block duplicate_block(t_block shape);
-void free_block(t_block shape);
-int check_new_position(t_block shape, t_game *game);
-void rotate_block(t_block shape);
+t_block duplicate_block(t_block block);
+void free_block(t_block *block);
+int check_new_position(t_game *game, t_block *block);
+void rotate_block(t_block *block);
 t_block create_block();
 
 // operate.c

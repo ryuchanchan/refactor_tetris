@@ -6,7 +6,7 @@
 /*   By: hitoda <hitoda@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/05 02:29:31 by hitoda            #+#    #+#             */
-/*   Updated: 2022/08/07 00:41:41 by hitoda           ###   ########.fr       */
+/*   Updated: 2022/08/07 03:10:51 by hitoda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,45 +29,45 @@ t_block duplicate_block(t_block block)
     return new_block;
 }
 
-void free_block(t_block block)
+void free_block(t_block *block)
 {
     int i;
 	
-    for(i = 0; i < block.width; i++){
-		free(block.shape[i]);
+    for(i = 0; i < block->width; i++){
+		free(block->shape[i]);
     }
-    free(block.shape);
+    free(block->shape);
 }
 
-int check_new_position(t_block block, t_game *game)
+int check_new_position(t_game *game, t_block *block)
 {
 	int i, j;
 
-	for(i = 0; i < block.width;i++) {
-		for(j = 0; j < block.width ;j++){
-			if((block.position_x + j) < 0 || MAP_WIDTH <= (block.position_x + j) \
-				|| MAP_HEIGHT <= (block.position_y + i)){
-				if(block.shape[i][j])
+	for(i = 0; i < block->width;i++) {
+		for(j = 0; j < block->width ;j++){
+			if((block->position_x + j) < 0 || MAP_WIDTH <= (block->position_x + j) \
+				|| MAP_HEIGHT <= (block->position_y + i)){
+				if(block->shape[i][j])
 					return false;
 			}
-			else if(game->map[block.position_y + i][block.position_x + j] && block.shape[i][j])
+			else if(game->map[block->position_y + i][block->position_x + j] && block->shape[i][j])
 				return false;
 		}
 	}
 	return true;
 }
 
-void rotate_block(t_block block)
+void rotate_block(t_block *block)
 {
 	int i, j, k;
 
-	t_block temp = duplicate_block(block);
-	for(i = 0; i < block.width; i++)
+	t_block temp = duplicate_block(*block);
+	for(i = 0; i < block->width; i++)
 	{
-		for(j = 0, k = (block.width - 1); j < block.width; j++, k--)
-			block.shape[i][j] = temp.shape[k][i];
+		for(j = 0, k = (block->width - 1); j < block->width; j++, k--)
+			block->shape[i][j] = temp.shape[k][i];
 	}
-	free_block(temp);
+	free_block(&temp);
 }
 
 t_block create_block()

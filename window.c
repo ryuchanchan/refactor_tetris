@@ -6,18 +6,18 @@
 /*   By: hitoda <hitoda@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/06 21:33:06 by hitoda            #+#    #+#             */
-/*   Updated: 2022/08/06 21:35:14 by hitoda           ###   ########.fr       */
+/*   Updated: 2022/08/07 03:11:39 by hitoda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "tetris.h"
 
-static char check_current_block_position(int i, int j)
+static char check_current_block_position(int i, int j, t_block *current)
 {
-	if (current.position_y <= i && i < current.position_y + current.width \
-		&& current.position_x <= j && j < current.position_x + current.width)
+	if (current->position_y <= i && i < current->position_y + current->width \
+		&& current->position_x <= j && j < current->position_x + current->width)
 	{
-		if (current.shape[i - current.position_y][j - current.position_x])
+		if (current->shape[i - current->position_y][j - current->position_x])
 			return (1);
 	}
 	return (0);
@@ -30,7 +30,7 @@ static void print_current_game(t_game *game)
 
 	for(i = 0; i < MAP_HEIGHT; i++){
 		for(j = 0; j < MAP_WIDTH ; j++){
-			current_block = check_current_block_position(i, j);
+			current_block = check_current_block_position(i, j, &game->current);
 			printw("%c ", (game->map[i][j] + current_block)? '#': '.');
 		}
 		printw("\n");

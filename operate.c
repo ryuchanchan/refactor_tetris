@@ -6,7 +6,7 @@
 /*   By: hitoda <hitoda@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/06 23:47:56 by rykawamu          #+#    #+#             */
-/*   Updated: 2022/08/07 01:24:32 by hitoda           ###   ########.fr       */
+/*   Updated: 2022/08/07 03:15:53 by hitoda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,10 @@ static void    insert_block_to_map(t_game *game)
 {
     int i, j;
 
-    for(i = 0; i < current.width ;i++){
-        for(j = 0; j < current.width ; j++){
-            if(current.shape[i][j])
-                game->map[current.position_y+i][current.position_x+j] = current.shape[i][j];
+    for(i = 0; i < game->current.width ;i++){
+        for(j = 0; j < game->current.width ; j++){
+            if(game->current.shape[i][j])
+                game->map[game->current.position_y + i][game->current.position_x + j] = game->current.shape[i][j];
         }
     }
 }
@@ -52,10 +52,10 @@ void operate(char c, t_game *game)
 {
     int i, j;
 
-    t_block temp = duplicate_block(current);
+    t_block temp = duplicate_block(game->current);
     switch(c){
-        case 's':
-            temp.position_y++;	//move down
+        case 's':	//move down
+            temp.position_y++;
             break;
         case 'd':	//move right
             temp.position_x++;
@@ -64,27 +64,27 @@ void operate(char c, t_game *game)
             temp.position_x--;
             break;
         case 'w':	//rotate
-            rotate_block(temp);
+            rotate_block(&temp);
             break;
     }
-	if(check_new_position(temp, game))
+	if(check_new_position(game, &temp))
 	{
-		free_block(current);
-		current = temp;
+		free_block(&game->current);
+		game->current = temp;
 	}
 	else if (c == 's')
 	{
 		insert_block_to_map(game);
 		check_row_filled(game);
-		t_block new_shape = create_block();
-		free_block(current);
-		current = new_shape;
-		if(!check_new_position(current, game)){
+		t_block new_block = create_block();
+		free_block(&game->current);
+		game->current = new_block;
+		if(!check_new_position(game, &game->current)){
 			game->status = false;
 		}
-		free_block(temp);
+		free_block(&temp);
 	}
 	else
-		free_block(temp);
+		free_block(&temp);
 	print_window(game);
 }

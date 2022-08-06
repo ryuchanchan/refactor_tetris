@@ -6,7 +6,7 @@
 /*   By: hitoda <hitoda@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/05 01:41:06 by hitoda            #+#    #+#             */
-/*   Updated: 2022/08/07 01:11:39 by hitoda           ###   ########.fr       */
+/*   Updated: 2022/08/07 03:06:20 by hitoda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,10 +30,10 @@ void init_game(t_game *game)
 	srand(time(0));
 	init_game_info(game);
 
-	t_block new_block = create_block();
-	free_block(current);
-	current = new_block;
-	if(!check_new_position(current, game))
+	game->current = create_block();
+	// free_block(current);
+	// current = new_block;
+	if(!check_new_position(game, &game->current))
 		game->status = false;
 	else
 		game->status = true;
