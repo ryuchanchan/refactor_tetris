@@ -6,32 +6,43 @@
 /*   By: hitoda <hitoda@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/06 23:47:35 by rykawamu          #+#    #+#             */
-/*   Updated: 2022/08/07 03:13:55 by hitoda           ###   ########.fr       */
+/*   Updated: 2022/08/07 04:03:48 by hitoda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "tetris.h"
 
-int main() {
-	t_game game;
-	int c;
+// #include <libc.h>
+// __attribute__((destructor))
+// static void destructor() {
+//     system("leaks -q tetris");
+// }
 
-	init_game(&game);
-	while(game.status){
-		if ((c = getch()) != ERR)
-			operate(c, &game);
-		gettimeofday(&game.now, NULL);
-		if (check_time_diff(&game)) {
-			operate('s', &game);
-			gettimeofday(&game.previous_time, NULL);
+static void	play_game(t_game *game)
+{
+	int key;
+
+	while(game->status){
+		if ((key = getch()) != ERR)
+		{
+			if (key == 's' || key == 'd' || key == 'a' || key == 'w')
+				key_operate(key, game);
+		}
+		gettimeofday(&game->now, NULL);
+		if (check_time_diff(game))
+		{
+			key_operate('s', game);
+			gettimeofday(&game->previous_time, NULL);
 		}
 	}
-	end_game(&game);
-    return 0;
 }
 
-#include <libc.h>
-__attribute__((destructor))
-static void destructor() {
-    system("leaks -q tetris");
+int main()
+{
+	t_game game;
+
+	init_game(&game);
+	play_game(&game);
+	end_game(&game);
+    return 0;
 }

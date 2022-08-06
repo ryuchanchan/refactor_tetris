@@ -6,7 +6,7 @@
 /*   By: hitoda <hitoda@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/06 23:47:56 by rykawamu          #+#    #+#             */
-/*   Updated: 2022/08/07 03:15:53 by hitoda           ###   ########.fr       */
+/*   Updated: 2022/08/07 04:11:30 by hitoda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,34 +24,51 @@ static void    insert_block_to_map(t_game *game)
     }
 }
 
-static void erase_line_from_map(int row, t_game  *game)
+static void erase_line_from_map(int row, t_game *game)
 {
     int i, j;
+	
     for(i = row; i >= 1; i--)
-        for(j=0; j < MAP_WIDTH; j++)
+	{
+		for(j = 0; j < MAP_WIDTH; j++)
             game->map[i][j] = game->map[i-1][j];
-    for(j=0; j < MAP_WIDTH; j++)
-        game->map[i][j]=0;
-    game->speed -= game->time_decrease--;
-    game->score += 100;
+	}
+    for(j = 0; j < MAP_WIDTH; j++)
+        game->map[i][j] = 0;
 }
 
-static void check_row_filled(t_game   *game)
+static void check_row_filled(t_game *game)
 {
     int row, col, filled;
     for(row = 0; row < MAP_HEIGHT; row++){
         filled = 0;
         for(col = 0; col < MAP_WIDTH; col++)
-            filled+=game->map[row][col];
-        if(filled==MAP_WIDTH)
-            erase_line_from_map(row, game);
+            filled += game->map[row][col];
+        if(filled == MAP_WIDTH)
+		{
+			erase_line_from_map(row, game);
+			game->speed -= game->time_decrease--;
+    		game->score += 100;
+		}
     }
 }
 
-void operate(char c, t_game *game)
+void next_block(t_game *game)
+{
+	insert_block_to_map(game);
+	check_row_filled(game);
+	free_block(&game->current);
+	game->current = create_block();
+	if(!check_new_position(game, &game->current))
+		game->status = false;
+}
+
+void key_operate(char key, t_game *game)
 {
     t_block temp = duplicate_block(game->current);
-    switch(c){
+
+    switch(key)
+	{
         case 's':	//move down
             temp.position_y++;
             break;
@@ -70,16 +87,9 @@ void operate(char c, t_game *game)
 		free_block(&game->current);
 		game->current = temp;
 	}
-	else if (c == 's')
+	else if (key == 's')
 	{
-		insert_block_to_map(game);
-		check_row_filled(game);
-		t_block new_block = create_block();
-		free_block(&game->current);
-		game->current = new_block;
-		if(!check_new_position(game, &game->current)){
-			game->status = false;
-		}
+		next_block(game);
 		free_block(&temp);
 	}
 	else

@@ -6,7 +6,7 @@
 /*   By: hitoda <hitoda@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/05 01:41:06 by hitoda            #+#    #+#             */
-/*   Updated: 2022/08/07 03:06:20 by hitoda           ###   ########.fr       */
+/*   Updated: 2022/08/07 03:34:05 by hitoda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,6 @@ void init_game(t_game *game)
 	init_game_info(game);
 
 	game->current = create_block();
-	// free_block(current);
-	// current = new_block;
 	if(!check_new_position(game, &game->current))
 		game->status = false;
 	else

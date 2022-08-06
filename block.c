@@ -6,7 +6,7 @@
 /*   By: hitoda <hitoda@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/05 02:29:31 by hitoda            #+#    #+#             */
-/*   Updated: 2022/08/07 03:10:51 by hitoda           ###   ########.fr       */
+/*   Updated: 2022/08/07 03:47:25 by hitoda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,12 @@ t_block duplicate_block(t_block block)
 
 	new_block.shape = (char**)malloc(new_block.width * sizeof(char*));
 	if (!new_block.shape)
-		exit(1);
+		exit(EXIT_FAILURE);
     for(i = 0; i < new_block.width; i++)
 	{
 		new_block.shape[i] = (char*)malloc(new_block.width * sizeof(char));
 		if (!new_block.shape[i])
-			exit(1);
+			exit(EXIT_FAILURE);
 		for(j = 0; j < new_block.width; j++)
 		{
 			new_block.shape[i][j] = block.shape[i][j];

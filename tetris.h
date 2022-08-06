@@ -6,7 +6,7 @@
 /*   By: hitoda <hitoda@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/06 23:49:05 by rykawamu          #+#    #+#             */
-/*   Updated: 2022/08/07 03:15:42 by hitoda           ###   ########.fr       */
+/*   Updated: 2022/08/07 03:53:03 by hitoda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,25 +39,24 @@ typedef struct {
 	t_block current;
 } t_game;
 
-
-// time.c
-int check_time_diff(t_game *game);
-
 // init.c
-void init_game(t_game *game);
+void	init_game(t_game *game);
 
 // block.c
-t_block duplicate_block(t_block block);
-void free_block(t_block *block);
-int check_new_position(t_game *game, t_block *block);
-void rotate_block(t_block *block);
-t_block create_block();
+t_block	duplicate_block(t_block block);
+void	free_block(t_block *block);
+int		check_new_position(t_game *game, t_block *block);
+void	rotate_block(t_block *block);
+t_block	create_block();
 
 // operate.c
-void	operate(char c, t_game *game);
+void	key_operate(char c, t_game *game);
 
 // window.c
 void	print_window(t_game *game);
+
+// time.c
+int		check_time_diff(t_game *game);
 
 // output.c
 void	end_game(t_game *game);
