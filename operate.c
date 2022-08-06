@@ -52,9 +52,8 @@ static void check_row_filled(t_game   *game)
 void operate(char c, t_game *game)
 {
     int i, j;
-    t_block *current;
 
-    t_block temp = duplicate_block(*current);
+    t_block temp = duplicate_block(current);
     switch(c){
         case 's':
             temp.position_y++;	//move down
@@ -71,17 +70,17 @@ void operate(char c, t_game *game)
     }
 	if(check_new_position(temp, game))
 	{
-		free_block(*current);
-		current = &temp;
+		free_block(current);
+		current = temp;
 	}
 	else if (c == 's')
 	{
 		insert_block_to_map(game);
 		check_row_filled(game);
 		t_block new_shape = create_block();
-		free_block(*current);
-		current = &new_shape;
-		if(!check_new_position(*current, game)){
+		free_block(current);
+		current = new_shape;
+		if(!check_new_position(current, game)){
 			game->status = false;
 		}
 		free_block(temp);

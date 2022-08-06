@@ -27,7 +27,7 @@ typedef struct {
 	int position_y;
 	int position_x;
 } t_block;
-// t_block current;
+t_block current;
 
 typedef struct {
 	char map[MAP_HEIGHT][MAP_WIDTH];
@@ -48,7 +48,7 @@ void init_game(t_game *game);
 
 // block.c
 t_block duplicate_block(t_block shape);
-void *free_block(t_block shape);
+void free_block(t_block shape);
 int check_new_position(t_block shape, t_game *game);
 void rotate_block(t_block shape);
 t_block create_block();

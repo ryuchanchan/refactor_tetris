@@ -25,9 +25,7 @@ static void	print_map(t_game *game)
 }
 
 void	end_game(t_game *game)
-{
-	t_block current;
-	
+{	
 	free_block(current);
 	endwin();
 	print_map(game);
