@@ -18,9 +18,13 @@ t_block duplicate_block(t_block block)
 	int i, j;
 
 	new_block.shape = (char**)malloc(new_block.width * sizeof(char*));
+	if (!new_block.shape)
+		exit(1);
     for(i = 0; i < new_block.width; i++)
 	{
 		new_block.shape[i] = (char*)malloc(new_block.width * sizeof(char));
+		if (!new_block.shape[i])
+			exit(1);
 		for(j = 0; j < new_block.width; j++)
 		{
 			new_block.shape[i][j] = block.shape[i][j];

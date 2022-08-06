@@ -15,12 +15,11 @@
 static void    insert_block_to_map(t_game *game)
 {
     int i, j;
-    t_block *current;
 
-    for(i = 0; i < current->width ;i++){
-        for(j = 0; j < current->width ; j++){
-            if(current->shape[i][j])
-                game->map[current->position_y+i][current->position_x+j] = current->shape[i][j];
+    for(i = 0; i < current.width ;i++){
+        for(j = 0; j < current.width ; j++){
+            if(current.shape[i][j])
+                game->map[current.position_y+i][current.position_x+j] = current.shape[i][j];
         }
     }
 }

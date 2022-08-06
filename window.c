@@ -14,12 +14,10 @@
 
 static char check_current_block_position(int i, int j)
 {
-	t_block *current;
-
-	if (current->position_y <= i && i < current->position_y + current->width \
-		&& current->position_x <= j && j < current->position_x + current->width)
+	if (current.position_y <= i && i < current.position_y + current.width \
+		&& current.position_x <= j && j < current.position_x + current.width)
 	{
-		if (current->shape[i - current->position_y][j - current->position_x])
+		if (current.shape[i - current.position_y][j - current.position_x])
 			return (1);
 	}
 	return (0);
