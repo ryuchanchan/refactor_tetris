@@ -6,15 +6,15 @@
 /*   By: hitoda <hitoda@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/05 02:29:31 by hitoda            #+#    #+#             */
-/*   Updated: 2022/08/07 02:00:08 by hitoda           ###   ########.fr       */
+/*   Updated: 2022/08/07 03:10:51 by hitoda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "tetris.h"
 
-t_block duplicate_block(t_block *block)
+t_block duplicate_block(t_block block)
 {
-	t_block new_block = *block;
+	t_block new_block = block;
 	int i, j;
 
 	new_block.shape = (char**)malloc(new_block.width * sizeof(char*));
@@ -23,7 +23,7 @@ t_block duplicate_block(t_block *block)
 		new_block.shape[i] = (char*)malloc(new_block.width * sizeof(char));
 		for(j = 0; j < new_block.width; j++)
 		{
-			new_block.shape[i][j] = block->shape[i][j];
+			new_block.shape[i][j] = block.shape[i][j];
 		}
     }
     return new_block;
@@ -39,7 +39,7 @@ void free_block(t_block *block)
     free(block->shape);
 }
 
-int check_new_position(t_block *block, t_game *game)
+int check_new_position(t_game *game, t_block *block)
 {
 	int i, j;
 
@@ -61,7 +61,7 @@ void rotate_block(t_block *block)
 {
 	int i, j, k;
 
-	t_block temp = duplicate_block(block);
+	t_block temp = duplicate_block(*block);
 	for(i = 0; i < block->width; i++)
 	{
 		for(j = 0, k = (block->width - 1); j < block->width; j++, k--)
@@ -70,7 +70,7 @@ void rotate_block(t_block *block)
 	free_block(&temp);
 }
 
-t_block *create_block()
+t_block create_block()
 {
 	const t_block block_patterns[BLOCK_TYPE]= {
 	{(char *[]){(char []){0,1,1},
@@ -100,5 +100,5 @@ t_block *create_block()
 	new_block.position_x = rand() % (MAP_WIDTH - new_block.width + 1);
     new_block.position_y = 0;
 
-	return &new_block;
+	return new_block;
 }

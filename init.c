@@ -6,7 +6,7 @@
 /*   By: hitoda <hitoda@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/05 01:41:06 by hitoda            #+#    #+#             */
-/*   Updated: 2022/08/07 01:46:50 by hitoda           ###   ########.fr       */
+/*   Updated: 2022/08/07 03:06:20 by hitoda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,20 +25,20 @@ static void init_game_info(t_game *game)
 	gettimeofday(&game->previous_time, NULL);
 }
 
-void init_game(t_game *game, t_block *current)
+void init_game(t_game *game)
 {
 	srand(time(0));
 	init_game_info(game);
 
-	current = create_block();
+	game->current = create_block();
 	// free_block(current);
 	// current = new_block;
-	if(!check_new_position(current, game))
+	if(!check_new_position(game, &game->current))
 		game->status = false;
 	else
 		game->status = true;
 
 	initscr();
 	timeout(1);
-    print_window(game, current);
+    print_window(game);
 }
