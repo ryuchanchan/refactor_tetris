@@ -27,17 +27,18 @@ static void init_game_info(t_game *game)
 
 void init_game(t_game *game)
 {
+	t_block *current;
+
 	srand(time(0));
 	init_game_info(game);
 
 	t_block new_block = create_block();
 	free_block(current);
-	current = new_block;
-	if(!check_new_position(current, game))
+	current = &new_block;
+	if(!check_new_position(*current, game))
 		game->status = false;
 	else
 		game->status = true;
-
 	initscr();
 	timeout(1);
     print_window(game);

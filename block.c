@@ -29,7 +29,7 @@ t_block duplicate_block(t_block block)
     return new_block;
 }
 
-void free_block(t_block block)
+void *free_block(t_block block)
 {
     int i;
 	

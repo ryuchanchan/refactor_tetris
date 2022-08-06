@@ -15,11 +15,12 @@
 static void    insert_block_to_map(t_game *game)
 {
     int i, j;
+    t_block *current;
 
-    for(i = 0; i < current.width ;i++){
-        for(j = 0; j < current.width ; j++){
-            if(current.shape[i][j])
-                game->map[current.position_y+i][current.position_x+j] = current.shape[i][j];
+    for(i = 0; i < current->width ;i++){
+        for(j = 0; j < current->width ; j++){
+            if(current->shape[i][j])
+                game->map[current->position_y+i][current->position_x+j] = current->shape[i][j];
         }
     }
 }
@@ -51,8 +52,9 @@ static void check_row_filled(t_game   *game)
 void operate(char c, t_game *game)
 {
     int i, j;
+    t_block *current;
 
-    t_block temp = duplicate_block(current);
+    t_block temp = duplicate_block(*current);
     switch(c){
         case 's':
             temp.position_y++;	//move down
@@ -69,17 +71,17 @@ void operate(char c, t_game *game)
     }
 	if(check_new_position(temp, game))
 	{
-		free_block(current);
-		current = temp;
+		free_block(*current);
+		current = &temp;
 	}
 	else if (c == 's')
 	{
 		insert_block_to_map(game);
 		check_row_filled(game);
 		t_block new_shape = create_block();
-		free_block(current);
-		current = new_shape;
-		if(!check_new_position(current, game)){
+		free_block(*current);
+		current = &new_shape;
+		if(!check_new_position(*current, game)){
 			game->status = false;
 		}
 		free_block(temp);

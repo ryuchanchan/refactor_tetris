@@ -27,6 +27,5 @@ int main() {
 		}
 	}
 	end_game(&game);
-	
     return 0;
 }
