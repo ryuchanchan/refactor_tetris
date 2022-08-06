@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   operate.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rykawamu </var/mail/rykawamu>              +#+  +:+       +#+        */
+/*   By: hitoda <hitoda@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/06 23:47:56 by rykawamu          #+#    #+#             */
-/*   Updated: 2022/08/06 23:48:00 by rykawamu         ###   ########.fr       */
+/*   Updated: 2022/08/07 00:13:36 by hitoda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ void operate(char c, t_game *game)
     t_block temp = duplicate_block(current);
     switch(c){
         case 's':
-            temp.position_y++;  //move down
+            temp.position_y++;	//move down
             if(check_new_position(temp, game))
                 current.position_y++;
             else {
@@ -67,17 +67,17 @@ void operate(char c, t_game *game)
                 }
             }
             break;
-        case 'd':
+        case 'd':	//move right
             temp.position_x++;
             if(check_new_position(temp, game))
                 current.position_x++;
             break;
-        case 'a':
+        case 'a':	//move left
             temp.position_x--;
             if(check_new_position(temp, game))
                 current.position_x--;
             break;
-        case 'w':
+        case 'w':	//rotate
             rotate_block(temp);
             if(check_new_position(temp, game))
                 rotate_block(current);
