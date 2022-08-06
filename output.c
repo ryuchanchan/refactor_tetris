@@ -6,7 +6,7 @@
 /*   By: hitoda <hitoda@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/06 21:25:18 by hitoda            #+#    #+#             */
-/*   Updated: 2022/08/06 21:27:45 by hitoda           ###   ########.fr       */
+/*   Updated: 2022/08/07 03:11:14 by hitoda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,8 @@ static void	print_map(t_game *game)
 }
 
 void	end_game(t_game *game)
-{	
-	free_block(current);
+{
+	free_block(&game->current);
 	endwin();
 	print_map(game);
 	printf("\nGame over!\n");
