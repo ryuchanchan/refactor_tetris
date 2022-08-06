@@ -6,7 +6,7 @@
 /*   By: hitoda <hitoda@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/06 23:49:05 by rykawamu          #+#    #+#             */
-/*   Updated: 2022/08/07 00:13:40 by hitoda           ###   ########.fr       */
+/*   Updated: 2022/08/07 02:06:27 by hitoda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,10 +54,10 @@ void rotate_block(t_block shape);
 t_block create_block();
 
 // operate.c
-void operate(char c, t_game *game);
+void	operate(char c, t_game *game);
 
 // window.c
-void print_window(t_game *game);
+void	print_window(t_game *game);
 
 // output.c
 void	end_game(t_game *game);
