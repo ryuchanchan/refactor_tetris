@@ -24,25 +24,27 @@ static void    copy_block(t_game *game)
     }
 }
 
-static void delete_block(t_game   *game)
+static void erase_line_from_map(int row, t_game  *game)
 {
-    int n, m, sum, count=0;
-    for(n = 0; n < MAP_HEIGHT; n++){
-        sum = 0;
-        for(m = 0; m < MAP_WIDTH; m++) {
-            sum+=game->map[n][m];
-        }
-        if(sum==MAP_WIDTH){
-            count++;
-            int l, k;
-            for(k = n; k >= 1; k--)
-                for(l=0; l < MAP_WIDTH; l++)
-                    game->map[k][l] = game->map[k-1][l];
-            for(l=0; l < MAP_WIDTH; l++)
-                game->map[k][l]=0;
-            game->speed -= game->time_decrease--;
-        }
-        game->score += 100*count;
+    int i, j;
+    for(i = row; i >= 1; i--)
+        for(j=0; j < MAP_WIDTH; j++)
+            game->map[i][j] = game->map[i-1][j];
+    for(j=0; j < MAP_WIDTH; j++)
+        game->map[i][j]=0;
+    game->speed -= game->time_decrease--;
+    game->score += 100;
+}
+
+static void check_row_filled(t_game   *game)
+{
+    int row, col, filled;
+    for(row = 0; row < MAP_HEIGHT; row++){
+        filled = 0;
+        for(col = 0; col < MAP_WIDTH; col++)
+            filled+=game->map[row][col];
+        if(filled==MAP_WIDTH)
+            erase_line_from_map(row, game);
     }
 }
 
@@ -58,7 +60,7 @@ void operate(char c, t_game *game)
                 current.position_y++;
             else {
                 copy_block(game);
-                delete_block(game);
+                check_row_filled(game);
                 t_block new_shape = create_block();
                 free_block(current);
                 current = new_shape;
