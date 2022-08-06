@@ -46,5 +46,6 @@ t_block create_block();
 void operate(char c, t_game *game);
 
 // output.c
-void	output_tetris(t_game game);
+void	end_game(t_game *game);
+
 #endif

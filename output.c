@@ -1,15 +1,34 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   output.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: hitoda <hitoda@student.42tokyo.jp>         +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/08/06 21:25:18 by hitoda            #+#    #+#             */
+/*   Updated: 2022/08/06 21:27:45 by hitoda           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "tetris.h"
 
-void	output_tetris(t_game	game)
+static void	print_map(t_game *game)
 {
 	int i,j;
 
 	for(i = 0; i < MAP_HEIGHT; i++){
-	for(j = 0; j < MAP_WIDTH; j++){
-		printf("%c ", game.map[i][j] ? '#': '.');
+		for(j = 0; j < MAP_WIDTH; j++){
+			printf("%c ", game->map[i][j] ? '#': '.');
+		}
+		printf("\n");
 	}
-	printf("\n");
-	}
+}
+
+void	end_game(t_game *game)
+{
+	free_block(current);
+	endwin();
+	print_map(game);
 	printf("\nGame over!\n");
-	printf("\nScore: %d\n", game.score);
+	printf("\nScore: %d\n", game->score);
 }

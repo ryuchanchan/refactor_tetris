@@ -14,9 +14,7 @@ int main() {
 			gettimeofday(&game.previous_time, NULL);
 		}
 	}
-	free_block(current);
-	endwin();
-	output_tetris(game);
+	end_game(&game);
 	
     return 0;
 }
