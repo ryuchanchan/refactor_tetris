@@ -50,8 +50,6 @@ static void check_row_filled(t_game   *game)
 
 void operate(char c, t_game *game)
 {
-    int i, j;
-
     t_block temp = duplicate_block(game->current);
     switch(c){
         case 's':	//move down

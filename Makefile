@@ -12,17 +12,15 @@
 
 NAME	= tetris
 CC		= gcc
-CFLAG	= -Wall -Wextra -Werror -lncurses
+CFLAG	= -Wall -Wextra -Werror
 SRCS	= main.c init.c time.c operate.c block.c output.c window.c
 OBJS	= ${SRCS:.c=.o}
+LIB		= -lncurses
 
 all: ${NAME}
 
 ${NAME}: ${SRCS} ${OBJS}
-	${CC} ${CFLAG} -o ${NAME} ${SRCS}
-
-tetris: main.c
-	gcc main.c init.c time.c operate.c block.c output.c window.c -lncurses -o tetris
+	${CC} ${CFLAG} ${LIB} -o ${NAME} ${SRCS}
 
 clean:
 	${RM} ${OBJS}
@@ -30,6 +28,6 @@ clean:
 fclean: clean
 	${RM} ${NAME}
  
- re: fclean tetris
+re: fclean tetris
 
 .PHONY: all tetris clean fclean re

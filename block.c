@@ -79,25 +79,25 @@ t_block create_block()
 	const t_block block_patterns[BLOCK_TYPE]= {
 	{(char *[]){(char []){0,1,1},
 				(char []){1,1,0},
-				(char []){0,0,0}}, 3},
+				(char []){0,0,0}}, 3, 0, 0},
 	{(char *[]){(char []){1,1,0},
 				(char []){0,1,1},
-				(char []){0,0,0}}, 3},
+				(char []){0,0,0}}, 3, 0, 0},
 	{(char *[]){(char []){0,1,0},
 				(char []){1,1,1},
-				(char []){0,0,0}}, 3},
+				(char []){0,0,0}}, 3, 0, 0},
 	{(char *[]){(char []){0,0,1},
 				(char []){1,1,1},
-				(char []){0,0,0}}, 3},
+				(char []){0,0,0}}, 3, 0, 0},
 	{(char *[]){(char []){1,0,0},
 				(char []){1,1,1}, 
-				(char []){0,0,0}}, 3},
+				(char []){0,0,0}}, 3, 0, 0},
 	{(char *[]){(char []){1,1},
-				(char []){1,1}}, 2},
+				(char []){1,1}}, 2, 0, 0},
 	{(char *[]){(char []){0,0,0,0},
 				(char []){1,1,1,1},
 				(char []){0,0,0,0}, 
-				(char []){0,0,0,0}}, 4}
+				(char []){0,0,0,0}}, 4, 0, 0}
 	};
 
 	t_block new_block = duplicate_block(block_patterns[rand()%BLOCK_TYPE]);
