@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   operate.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: hitoda <hitoda@student.42tokyo.jp>         +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/08/06 21:45:03 by hitoda            #+#    #+#             */
+/*   Updated: 2022/08/06 21:45:04 by hitoda           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "tetris.h"
 
 void operate(char c, t_game *game)
@@ -7,7 +19,7 @@ void operate(char c, t_game *game)
     t_block temp = duplicate_block(current);
     switch(c){
         case 's':
-            temp.position_y++;  //move down
+            temp.position_y++;	//move down
             if(check_new_position(temp, game))
                 current.position_y++;
             else {
@@ -43,17 +55,17 @@ void operate(char c, t_game *game)
                 }
             }
             break;
-        case 'd':
+        case 'd':	//move right
             temp.position_x++;
             if(check_new_position(temp, game))
                 current.position_x++;
             break;
-        case 'a':
+        case 'a':	//move left
             temp.position_x--;
             if(check_new_position(temp, game))
                 current.position_x--;
             break;
-        case 'w':
+        case 'w':	//rotate
             rotate_block(temp);
             if(check_new_position(temp, game))
                 rotate_block(current);
