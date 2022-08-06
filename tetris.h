@@ -28,8 +28,7 @@ typedef struct {
 } t_game;
 
 
-// utils.c
-void print_window(t_game *game);
+// time.c
 int check_time_diff(t_game *game);
 
 // init.c
@@ -44,6 +43,9 @@ t_block create_block();
 
 // operate.c
 void operate(char c, t_game *game);
+
+// window.c
+void print_window(t_game *game);
 
 // output.c
 void	end_game(t_game *game);

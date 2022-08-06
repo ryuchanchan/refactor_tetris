@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
+/*   window.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hitoda <hitoda@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/05 01:48:57 by hitoda            #+#    #+#             */
-/*   Updated: 2022/08/06 04:27:59 by hitoda           ###   ########.fr       */
+/*   Created: 2022/08/06 21:33:06 by hitoda            #+#    #+#             */
+/*   Updated: 2022/08/06 21:35:14 by hitoda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,10 +47,4 @@ void print_window(t_game *game)
 	printw("42 Tetris\n");
 	print_current_game(game);
 	printw("\nScore: %d\n", game->score);
-}
-
-struct timeval previous_time, now;
-int check_time_diff(t_game *game)
-{
-	return ((suseconds_t)(game->now.tv_sec*1000000 + game->now.tv_usec) -((suseconds_t)game->previous_time.tv_sec*1000000 + game->previous_time.tv_usec)) > game->speed;
 }

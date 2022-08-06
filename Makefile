@@ -1,5 +1,5 @@
 tetris: main.c
-	gcc main.c init.c utils.c operate.c block.c output.c -lncurses -o tetris
+	gcc main.c init.c time.c operate.c block.c output.c window.c -lncurses -o tetris
 
 fclean:
 	${RM} tetris
