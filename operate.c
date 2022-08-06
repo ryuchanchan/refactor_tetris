@@ -6,13 +6,13 @@
 /*   By: hitoda <hitoda@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/06 23:47:56 by rykawamu          #+#    #+#             */
-/*   Updated: 2022/08/07 00:13:36 by hitoda           ###   ########.fr       */
+/*   Updated: 2022/08/07 01:24:32 by hitoda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "tetris.h"
 
-static void    copy_block(t_game *game)
+static void    insert_block_to_map(t_game *game)
 {
     int i, j;
 
@@ -56,35 +56,35 @@ void operate(char c, t_game *game)
     switch(c){
         case 's':
             temp.position_y++;	//move down
-            if(check_new_position(temp, game))
-                current.position_y++;
-            else {
-                copy_block(game);
-                check_row_filled(game);
-                t_block new_shape = create_block();
-                free_block(current);
-                current = new_shape;
-                if(!check_new_position(current, game)){
-                    game->status = false;
-                }
-            }
             break;
         case 'd':	//move right
             temp.position_x++;
-            if(check_new_position(temp, game))
-                current.position_x++;
             break;
         case 'a':	//move left
             temp.position_x--;
-            if(check_new_position(temp, game))
-                current.position_x--;
             break;
         case 'w':	//rotate
             rotate_block(temp);
-            if(check_new_position(temp, game))
-                rotate_block(current);
             break;
-        }
-        free_block(temp);
-        print_window(game);
+    }
+	if(check_new_position(temp, game))
+	{
+		free_block(current);
+		current = temp;
+	}
+	else if (c == 's')
+	{
+		insert_block_to_map(game);
+		check_row_filled(game);
+		t_block new_shape = create_block();
+		free_block(current);
+		current = new_shape;
+		if(!check_new_position(current, game)){
+			game->status = false;
+		}
+		free_block(temp);
+	}
+	else
+		free_block(temp);
+	print_window(game);
 }
