@@ -6,7 +6,7 @@
 /*   By: hitoda <hitoda@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/06 23:49:05 by rykawamu          #+#    #+#             */
-/*   Updated: 2022/08/07 00:13:40 by hitoda           ###   ########.fr       */
+/*   Updated: 2022/08/07 02:00:36 by hitoda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ typedef struct {
 	int position_y;
 	int position_x;
 } t_block;
-t_block current;
 
 typedef struct {
 	char map[MAP_HEIGHT][MAP_WIDTH];
@@ -44,22 +43,22 @@ typedef struct {
 int check_time_diff(t_game *game);
 
 // init.c
-void init_game(t_game *game);
+void init_game(t_game *game, t_block *current);
 
 // block.c
-t_block duplicate_block(t_block shape);
-void free_block(t_block shape);
-int check_new_position(t_block shape, t_game *game);
-void rotate_block(t_block shape);
-t_block create_block();
+t_block duplicate_block(t_block *block);
+void free_block(t_block *block);
+int check_new_position(t_block *block, t_game *game);
+void rotate_block(t_block *block);
+t_block *create_block();
 
 // operate.c
-void operate(char c, t_game *game);
+void operate(char c, t_game *game, t_block *current);
 
 // window.c
-void print_window(t_game *game);
+void print_window(t_game *game, t_block *current);
 
 // output.c
-void	end_game(t_game *game);
+void	end_game(t_game *game, t_block *current);
 
 #endif

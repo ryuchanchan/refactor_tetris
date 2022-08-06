@@ -6,7 +6,7 @@
 /*   By: hitoda <hitoda@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/06 23:47:35 by rykawamu          #+#    #+#             */
-/*   Updated: 2022/08/07 00:13:27 by hitoda           ###   ########.fr       */
+/*   Updated: 2022/08/07 01:41:03 by hitoda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,19 +14,20 @@
 
 int main() {
 	t_game game;
+	t_block *current;
 	int c;
 
-	init_game(&game);
+	init_game(&game, current);
 	while(game.status){
 		if ((c = getch()) != ERR)
-			operate(c, &game);
+			operate(c, &game, current);
 		gettimeofday(&game.now, NULL);
 		if (check_time_diff(&game)) {
-			operate('s', &game);
+			operate('s', &game, current);
 			gettimeofday(&game.previous_time, NULL);
 		}
 	}
-	end_game(&game);
+	end_game(&game, current);
 	
     return 0;
 }
