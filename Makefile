@@ -30,4 +30,4 @@ fclean: clean
  
 re: fclean tetris
 
-.PHONY: all tetris clean fclean re
+.PHONY: all clean fclean re
